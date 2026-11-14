@@ -1,0 +1,809 @@
+Implement Banking Account Management system
+// Base class
+class BankAccount {
+    int accountNumber;
+    double balance;
+
+    public BankAccount(int accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public double calculateFinalBalance() {
+        return balance;
+    }
+}
+
+// Derived class 1
+class SavingsAccount extends BankAccount {
+    double interestRate;
+
+    public SavingsAccount(int accountNumber, double balance, double interestRate) {
+        super(accountNumber, balance);
+        this.interestRate = interestRate;
+    }
+
+    @Override
+    public double calculateFinalBalance() {
+        return balance + (balance * interestRate / 100);
+    }
+}
+
+// Derived class 2
+class CurrentAccount extends BankAccount {
+    double overdraftLimit;
+
+    public CurrentAccount(int accountNumber, double balance, double overdraftLimit) {
+        super(accountNumber, balance);
+        this.overdraftLimit = overdraftLimit;
+    }
+
+    @Override
+    public double calculateFinalBalance() {
+        return balance + overdraftLimit;
+    }
+}
+
+// Main class
+public class BankingAccountManagement {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        int accountNumber = sc.nextInt();
+        double balance = sc.nextDouble();
+        double value = sc.nextDouble();
+
+        BankAccount account;
+
+        if (type == 1) {
+            account = new SavingsAccount(accountNumber, balance, value);
+        } else {
+            account = new CurrentAccount(accountNumber, balance, value);
+        }
+
+        System.out.printf("%.2f", account.calculateFinalBalance());
+
+        sc.close();
+    }
+}
+E-Commerce Product Pricing
+
+import java.util.Scanner;
+
+class Product {
+    int productId;
+    String productName;
+    double price;
+
+    public Product(int productId, String productName, double price) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+    }
+
+    public double calculateDiscount() {
+        return 0.0;
+    }
+}
+
+class ElectronicsProduct extends Product {
+    public ElectronicsProduct(int productId, String productName, double price) {
+        super(productId, productName, price);
+    }
+
+    @Override
+    public double calculateDiscount() {
+        return price * 12 / 100;
+    }
+}
+
+class ClothingProduct extends Product {
+    public ClothingProduct(int productId, String productName, double price) {
+        super(productId, productName, price);
+    }
+
+    @Override
+    public double calculateDiscount() {
+        return price * 20 / 100;
+    }
+}
+
+class GroceryProduct extends Product {
+    public GroceryProduct(int productId, String productName, double price) {
+        super(productId, productName, price);
+    }
+
+    @Override
+    public double calculateDiscount() {
+        return price * 5 / 100;
+    }
+}
+
+public class EcommerceProductPricing {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        int id = sc.nextInt();
+        String name = sc.next();
+        double price = sc.nextDouble();
+
+        Product p;
+
+        if (type == 1) {
+            p = new ElectronicsProduct(id, name, price);
+        } else if (type == 2) {
+            p = new ClothingProduct(id, name, price);
+        } else {
+            p = new GroceryProduct(id, name, price);
+        }
+
+        double discount = p.calculateDiscount();
+        double finalPrice = price - discount;
+
+        System.out.println("Product ID: " + p.productId);
+        System.out.println("Product Name: " + p.productName);
+        System.out.printf("Discount: %.2f%n", discount);
+        System.out.printf("Final Price: %.2f%n", finalPrice);
+
+        sc.close();
+    }
+}
+Employee Access and Permission System
+
+import java.util.Scanner;
+
+interface AccessControl {
+    String getRole();
+    int getAccessLevel();
+    boolean canAccess(int requiredLevel);
+}
+
+class Developer implements AccessControl {
+    public String getRole() {
+        return "Developer";
+    }
+
+    public int getAccessLevel() {
+        return 1;
+    }
+
+    public boolean canAccess(int requiredLevel) {
+        return getAccessLevel() >= requiredLevel;
+    }
+}
+
+class Manager implements AccessControl {
+    public String getRole() {
+        return "Manager";
+    }
+
+    public int getAccessLevel() {
+        return 2;
+    }
+
+    public boolean canAccess(int requiredLevel) {
+        return getAccessLevel() >= requiredLevel;
+    }
+}
+
+class Administrator implements AccessControl {
+    public String getRole() {
+        return "Administrator";
+    }
+
+    public int getAccessLevel() {
+        return 3;
+    }
+
+    public boolean canAccess(int requiredLevel) {
+        return getAccessLevel() >= requiredLevel;
+    }
+}
+
+public class EmployeeAccessSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int roleType = sc.nextInt();
+        int requiredLevel = sc.nextInt();
+
+        AccessControl employee;
+
+        if (roleType == 1) {
+            employee = new Developer();
+        } else if (roleType == 2) {
+            employee = new Manager();
+        } else {
+            employee = new Administrator();
+        }
+
+        System.out.println("Role: " + employee.getRole()
+                + " Access Level: " + employee.getAccessLevel()
+                + " Can Access: " + employee.canAccess(requiredLevel));
+
+        sc.close();
+    }
+}
+Employee Performance Bonus.
+
+
+import java.util.Scanner;
+
+class Employee {
+    String employeeName;
+
+    Employee(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public double calculateBonus() {
+        return 0.0;
+    }
+
+    public double calculateBonus(double amount) {
+        return 0.0;
+    }
+}
+
+class TechnicalEmployee extends Employee {
+    double basicSalary;
+    int rating;
+
+    TechnicalEmployee(String employeeName, double basicSalary, int rating) {
+        super(employeeName);
+        this.basicSalary = basicSalary;
+        this.rating = rating;
+    }
+
+    // Method Overriding
+    @Override
+    public double calculateBonus() {
+        return basicSalary * rating * 2 / 100;
+    }
+
+    // Method Overloading
+    public double calculateBonus(double salary, int employeeRating) {
+        return salary * employeeRating * 2 / 100;
+    }
+}
+
+class SalesEmployee extends Employee {
+    double salesAmount;
+
+    SalesEmployee(String employeeName, double salesAmount) {
+        super(employeeName);
+        this.salesAmount = salesAmount;
+    }
+
+    // Method Overriding
+    @Override
+    public double calculateBonus() {
+        return salesAmount * 3 / 100;
+    }
+
+    public double calculateBonus(double amount) {
+        return amount * 3 / 100;
+    }
+}
+
+public class EmployeePerformanceBonus {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int employeeType = sc.nextInt();
+        String employeeName = sc.next();
+
+        Employee employee;
+        double bonus;
+        double baseAmount;
+
+        if (employeeType == 1) {
+            double basicSalary = sc.nextDouble();
+            int rating = sc.nextInt();
+
+            TechnicalEmployee tech =
+                new TechnicalEmployee(employeeName, basicSalary, rating);
+
+            employee = tech;
+            bonus = employee.calculateBonus();
+
+            // Calling overloaded method
+            tech.calculateBonus(basicSalary, rating);
+
+            baseAmount = basicSalary;
+
+        } else {
+            double salesAmount = sc.nextDouble();
+
+            SalesEmployee sales =
+                new SalesEmployee(employeeName, salesAmount);
+
+            employee = sales;
+            bonus = employee.calculateBonus();
+
+            // Calling the amount-based method
+            sales.calculateBonus(salesAmount);
+
+            baseAmount = salesAmount;
+        }
+
+        System.out.printf("Employee Name: %s Bonus: %.2f%n",
+                          employee.employeeName, bonus);
+
+        System.out.printf("Total Earnings: %.2f%n",
+                          baseAmount + bonus);
+
+        sc.close();
+    }
+}
+EmployeeSalaryProcessing
+
+
+import java.util.Scanner;
+
+abstract class Employee {
+    private int employeeId;
+    private String employeeName;
+
+    public Employee(int employeeId, String employeeName) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public abstract double calculateSalary();
+}
+
+class FullTimeEmployee extends Employee {
+    double monthlySalary;
+
+    public FullTimeEmployee(int id, String name, double monthlySalary) {
+        super(id, name);
+        this.monthlySalary = monthlySalary;
+    }
+
+    @Override
+    public double calculateSalary() {
+        return monthlySalary;
+    }
+}
+
+class ContractEmployee extends Employee {
+    int workingDays;
+    double dailyRate;
+
+    public ContractEmployee(int id, String name,
+                            int workingDays, double dailyRate) {
+        super(id, name);
+        this.workingDays = workingDays;
+        this.dailyRate = dailyRate;
+    }
+
+    @Override
+    public double calculateSalary() {
+        return workingDays * dailyRate;
+    }
+}
+
+public class EmployeeSalaryProcessing {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        int id = sc.nextInt();
+        String name = sc.next();
+
+        Employee emp;
+
+        if (type == 1) {
+            double salary = sc.nextDouble();
+            emp = new FullTimeEmployee(id, name, salary);
+        } else {
+            int days = sc.nextInt();
+            double rate = sc.nextDouble();
+            emp = new ContractEmployee(id, name, days, rate);
+        }
+
+        System.out.println("Employee ID: " + emp.getEmployeeId());
+        System.out.println("Employee Name: " + emp.getEmployeeName());
+        System.out.printf("Salary: %.2f%n", emp.calculateSalary());
+
+        sc.close();
+    }
+}
+
+Food Delivery Order
+
+
+import java.util.Scanner;
+
+class Delivery {
+    double orderAmount;
+
+    public Delivery(double orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
+    public double calculateDeliveryCharge() {
+        return orderAmount;
+    }
+}
+
+class RegularDelivery extends Delivery {
+    public RegularDelivery(double orderAmount) {
+        super(orderAmount);
+    }
+
+    @Override
+    public double calculateDeliveryCharge() {
+        return orderAmount + 40.0;
+    }
+}
+
+class ExpressDelivery extends Delivery {
+    public ExpressDelivery(double orderAmount) {
+        super(orderAmount);
+    }
+
+    @Override
+    public double calculateDeliveryCharge() {
+        double serviceCharge = orderAmount * 5 / 100;
+        return orderAmount + 80.0 + serviceCharge;
+    }
+}
+
+public class FoodDeliveryOrder {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        double amount = sc.nextDouble();
+
+        Delivery d;
+
+        if (type == 1) {
+            d = new RegularDelivery(amount);
+        } else {
+            d = new ExpressDelivery(amount);
+        }
+
+        System.out.printf("%.2f%n", d.calculateDeliveryCharge());
+
+        sc.close();
+    }
+}
+
+Hospital Billing System
+
+
+import java.util.Scanner;
+
+abstract class Doctor {
+    double consultationCharge;
+
+    public Doctor(double consultationCharge) {
+        this.consultationCharge = consultationCharge;
+    }
+
+    public abstract String getDoctorType();
+
+    public double calculateTotalBill(double testCharges) {
+        return consultationCharge;
+    }
+}
+
+class GeneralPhysician extends Doctor {
+    public GeneralPhysician() {
+        super(500.0);
+    }
+
+    @Override
+    public String getDoctorType() {
+        return "General Physician";
+    }
+}
+
+class Specialist extends Doctor {
+    public Specialist() {
+        super(1000.0);
+    }
+
+    @Override
+    public String getDoctorType() {
+        return "Specialist";
+    }
+}
+
+class EmergencyDoctor extends Doctor {
+    public EmergencyDoctor() {
+        super(1500.0);
+    }
+
+    @Override
+    public String getDoctorType() {
+        return "Emergency Doctor";
+    }
+
+    @Override
+    public double calculateTotalBill(double testCharges) {
+        return consultationCharge + testCharges;
+    }
+}
+
+public class HospitalBillingSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        double testCharges = sc.nextDouble();
+
+        Doctor d;
+
+        if (type == 1) {
+            d = new GeneralPhysician();
+        } else if (type == 2) {
+            d = new Specialist();
+        } else {
+            d = new EmergencyDoctor();
+        }
+
+        System.out.println("Doctor Type: " + d.getDoctorType());
+        System.out.printf("Consultation Charge: %.2f%n",
+                d.consultationCharge);
+        System.out.printf("Test Charges: %.2f%n", testCharges);
+        System.out.printf("Total Bill: %.2f%n",
+                d.calculateTotalBill(testCharges));
+
+        sc.close();
+    }
+}
+
+Online Course Fee Calculation
+
+
+import java.util.Scanner;
+
+abstract class Course {
+    double courseFee;
+
+    public Course(double courseFee) {
+        this.courseFee = courseFee;
+    }
+
+    public abstract double calculateDiscount();
+
+    public abstract String getCourseType();
+
+    public double calculateFinalFee() {
+        return courseFee - calculateDiscount();
+    }
+}
+
+class ProgrammingCourse extends Course {
+    public ProgrammingCourse(double courseFee) {
+        super(courseFee);
+    }
+
+    @Override
+    public double calculateDiscount() {
+        return courseFee * 10 / 100;
+    }
+
+    @Override
+    public String getCourseType() {
+        return "Programming";
+    }
+}
+
+class DataScienceCourse extends Course {
+    public DataScienceCourse(double courseFee) {
+        super(courseFee);
+    }
+
+    @Override
+    public double calculateDiscount() {
+        return courseFee * 15 / 100;
+    }
+
+    @Override
+    public String getCourseType() {
+        return "Data Science";
+    }
+}
+
+class CloudCourse extends Course {
+    public CloudCourse(double courseFee) {
+        super(courseFee);
+    }
+
+    @Override
+    public double calculateDiscount() {
+        return courseFee * 5 / 100;
+    }
+
+    @Override
+    public String getCourseType() {
+        return "Cloud";
+    }
+}
+
+public class OnlineCourseFeeCalculation {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        double fee = sc.nextDouble();
+
+        Course c;
+
+        if (type == 1) {
+            c = new ProgrammingCourse(fee);
+        } else if (type == 2) {
+            c = new DataScienceCourse(fee);
+        } else {
+            c = new CloudCourse(fee);
+        }
+
+        System.out.println("Course Type: " + c.getCourseType());
+        System.out.printf("Discount: %.2f%n", c.calculateDiscount());
+        System.out.printf("Final Fee: %.2f%n", c.calculateFinalFee());
+
+        sc.close();
+    }
+}
+
+Online Payment Processing
+
+
+import java.util.Scanner;
+
+// Interface
+interface Payment {
+    double calculateFee(double amount);
+}
+
+// Implementation 1
+class CreditCardPayment implements Payment {
+    public double calculateFee(double amount) {
+        return amount * 2 / 100; // 2% fee
+    }
+}
+
+// Implementation 2
+class UpiPayment implements Payment {
+    public double calculateFee(double amount) {
+        return amount * 0.5 / 100; // 0.5% fee
+    }
+}
+
+// Implementation 3
+class WalletPayment implements Payment {
+    public double calculateFee(double amount) {
+        return amount * 1 / 100; // 1% fee
+    }
+}
+
+// Main class
+public class OnlinePaymentProcessing {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        double amount = sc.nextDouble();
+
+        // Interface reference
+        Payment p;
+
+        if (type == 1) {
+            p = new CreditCardPayment();
+        } else if (type == 2) {
+            p = new UpiPayment();
+        } else {
+            p = new WalletPayment();
+        }
+
+        double fee = p.calculateFee(amount);
+        double finalAmount = amount + fee;
+
+        System.out.println("Payment Amount: " + String.format("%.2f", amount));
+        System.out.println("Transaction Fee: " + String.format("%.2f", fee));
+        System.out.println("Final Amount: " + String.format("%.2f", finalAmount));
+
+        sc.close();
+    }
+}
+
+Vehicle Rental System
+
+
+import java.util.Scanner;
+
+// Base class
+class Vehicle {
+    double dailyRate;
+
+    public Vehicle(double dailyRate) {
+        this.dailyRate = dailyRate;
+    }
+
+    public double calculateRentalCharge(int rentalDays) {
+        return dailyRate * rentalDays;
+    }
+
+    public String getVehicleType() {
+        return "Vehicle";
+    }
+}
+
+// Derived class 1
+class Car extends Vehicle {
+    public Car() {
+        super(1500.0);
+    }
+
+    @Override
+    public String getVehicleType() {
+        return "Car";
+    }
+}
+
+// Derived class 2
+class Bike extends Vehicle {
+    public Bike() {
+        super(600.0);
+    }
+
+    @Override
+    public String getVehicleType() {
+        return "Bike";
+    }
+}
+
+// Derived class 3
+class Truck extends Vehicle {
+    public Truck() {
+        super(3000.0);
+    }
+
+    @Override
+    public String getVehicleType() {
+        return "Truck";
+    }
+}
+
+// Main class
+public class VehicleRentalSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int type = sc.nextInt();
+        int rentalDays = sc.nextInt();
+
+        Vehicle v;
+
+        if (type == 1) {
+            v = new Car();
+        } else if (type == 2) {
+            v = new Bike();
+        } else {
+            v = new Truck();
+        }
+
+        System.out.println("Vehicle Type: " + v.getVehicleType());
+        System.out.printf("Rental Charge: %.2f",
+                v.calculateRentalCharge(rentalDays));
+
+        sc.close();
+    }
+}
+
+
